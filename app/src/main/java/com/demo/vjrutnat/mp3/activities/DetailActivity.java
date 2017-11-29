@@ -83,11 +83,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
             @Override
             public void onPageSelected(int position) {
-                switch (position) {
-                    case 0:
-                    case 1:
-                    case 2:
-                }
+
             }
 
             @Override
@@ -99,8 +95,6 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
     private void initControls() {
         imgBackGround = (ImageView) findViewById(R.id.img_back_ground_detail);
-
-
         tabLayoutDetail = (TabLayout) findViewById(R.id.tablayout_detail);
         mViewPager = (ViewPager) findViewById(R.id.view_pager_detail);
         tabLayoutDetail.setupWithViewPager(mViewPager);

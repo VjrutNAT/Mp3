@@ -2,34 +2,51 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="36dp"
-    android:orientation="vertical"
-    android:background="?attr/selectableItemBackground"
-    android:paddingLeft="8dp"
     android:layout_marginBottom="8dp"
-    >
+    android:background="?attr/selectableItemBackground"
+    android:orientation="vertical"
+    android:paddingLeft="8dp">
 
-    <TextView
-        android:id="@+id/tv_song_title_item"
+    <ImageView
+        android:id="@+id/img_album_song_play"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_centerVertical="true"
+        android:scaleType="fitXY"
+        android:src="@mipmap/ic_launcher" />
+
+    <RelativeLayout
+        android:id="@+id/rl_info_song_play"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/list_song"
-        android:textSize="@dimen/text_size_normal"
-        android:maxLines="1"
-        android:textColor="@color/white"/>
-    <TextView
-        android:id="@+id/artist_name_song_item"
-        android:layout_below="@id/tv_song_title_item"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="@string/artist_list"
-        android:textSize="@dimen/text_size_small"
-        android:textColor="@color/usui_grey"
-        android:maxLines="1"/>
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/img_album_song_play">
+
+        <TextView
+            android:id="@+id/tv_song_title_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="@string/list_song"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_normal" />
+
+        <TextView
+            android:id="@+id/artist_name_song_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_song_title_item"
+            android:layout_marginTop="4dp"
+            android:maxLines="1"
+            android:text="@string/artist_list"
+            android:textColor="@color/usui_grey"
+            android:textSize="@dimen/text_size_small" />
+    </RelativeLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/white"
-        android:layout_marginTop="4dp"/>
+        android:background="@color/usui_grey" />
 </RelativeLayout>

@@ -44,6 +44,7 @@ public class AlbumListActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Common.setStatusBarTranslucent(true,this);
+
         initControls();
         getAndShowSongList();
         showCover();

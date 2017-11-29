@@ -6,8 +6,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.demo.vjrutnat.mp3.R;
 import com.demo.vjrutnat.mp3.activities.PlayMusicActivity;
 import com.demo.vjrutnat.mp3.models.Song;
@@ -38,14 +40,21 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.ViewHo
 
     @Override
     public ViewHolderSong onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = mLayoutInflater.inflate(R
-                .layout.item_song, null);
+        View view = mLayoutInflater.inflate(R.layout.item_song, null);
         ViewHolderSong holder = new ViewHolderSong(view);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(ViewHolderSong holder, int position) {
+        Song item = mData.get(position);
+        holder.setId(position);
+        String path =  mData.get(position).getAlbumImagePath();
+        if(path != null) {
+            Glide.with(mContext).load(path).into(holder.imvArtist);
+        }else{
+            holder.imvArtist.setImageResource(R.drawable.default_cover_big);
+        }
         holder.tvTitle.setText(mData.get(position).getTitle());
         holder.tvArtist.setText(mData.get(position).getArtist());
         holder.setId(position);
@@ -65,6 +74,7 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.ViewHo
     public class ViewHolderSong extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView tvTitle;
         TextView tvArtist;
+        ImageView imvArtist;
         int id;
 
         public int getId() {
@@ -77,6 +87,7 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.ViewHo
 
         public ViewHolderSong(View itemView) {
             super(itemView);
+            imvArtist = (ImageView) itemView.findViewById(R.id.img_album_song_play);
             tvTitle = (TextView) itemView.findViewById(R.id.tv_song_title_item);
             tvArtist = (TextView) itemView.findViewById(R.id.artist_name_song_item);
             itemView.setOnClickListener(this);
