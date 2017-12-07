@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -21,7 +22,9 @@ import android.widget.ProgressBar;
 import com.demo.vjrutnat.mp3.R;
 import com.demo.vjrutnat.mp3.adapter.ArtistAdapter;
 import com.demo.vjrutnat.mp3.models.Artist;
+import com.demo.vjrutnat.mp3.models.Song;
 import com.demo.vjrutnat.mp3.utils.AppController;
+import com.demo.vjrutnat.mp3.utils.GridSpacingItemDecoration;
 
 import java.util.ArrayList;
 
@@ -30,6 +33,7 @@ public class FragmentArtist extends Fragment implements SearchView.OnQueryTextLi
     View mView;
     RecyclerView mRvListArtist;
     ArrayList<Artist> mLstArtist;
+    ArrayList<Song> mSongs;
     ArtistAdapter mArtistAdapter;
     ProgressBar mProgressBar;
     LoadArtistList loadArtistList;
@@ -126,6 +130,7 @@ public class FragmentArtist extends Fragment implements SearchView.OnQueryTextLi
         protected Object doInBackground(Object[] params) {
             if (AppController.getInstance().getLstArtist() == null) {
                 mLstArtist = AppController.getInstance().getListArtist();
+                mSongs = AppController.getInstance().getListSong();
             } else {
                 mLstArtist = AppController.getInstance().getListArtist();
             }
@@ -136,15 +141,19 @@ public class FragmentArtist extends Fragment implements SearchView.OnQueryTextLi
         protected void onPostExecute(Object o) {
             super.onPostExecute(o);
             mProgressBar.setVisibility(View.GONE);
-            mArtistAdapter = new ArtistAdapter(getActivity(), mLstArtist);
+            mArtistAdapter = new ArtistAdapter(getActivity(), mLstArtist, mSongs);
             mRvListArtist.setAdapter(mArtistAdapter);
         }
     }
 
     private void initControls() {
         mRvListArtist = (RecyclerView) mView.findViewById(R.id.rv_artist_list);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
         mRvListArtist.setLayoutManager(layoutManager);
+        int spanCount = 2; // 2 columns
+        int spacing = 40; // 40px
+        boolean includeEdge = true;
+        mRvListArtist.addItemDecoration(new GridSpacingItemDecoration(spanCount, spacing, includeEdge));
         mProgressBar = (ProgressBar) mView.findViewById(R.id.progress_bar_artist_list);
 
     }

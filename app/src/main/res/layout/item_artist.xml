@@ -1,24 +1,38 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="36dp"
-    android:background="?attr/selectableItemBackground"
-    android:orientation="vertical">
+<com.demo.vjrutnat.mp3.base.SquareRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground">
 
-    <TextView
-        android:id="@+id/artist_title_item"
+    <ImageView
+        android:id="@+id/iv_artist_img_item"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:maxLines="1"
-        android:text="@string/artist_list"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_size_normal"
-        android:gravity="center_vertical"
-        android:paddingLeft="8dp"/>
+        android:layout_height="match_parent"
+        android:src="@drawable/default_artist_cover"
+        android:scaleType="fitXY"/>
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/white" />
-</RelativeLayout>
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/pager_background"
+        android:layout_alignParentBottom="true">
+        <TextView
+            android:id="@+id/tv_artist_title_item"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:textSize="@dimen/text_size_normal"
+            android:text="@string/album_list"/>
+        <TextView
+            android:id="@+id/tv_number_album_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:textColor="@color/white"
+            android:text="@string/artist_list"
+            android:textSize="@dimen/text_size_small"
+            />
+    </LinearLayout>
+
+</com.demo.vjrutnat.mp3.base.SquareRelativeLayout>

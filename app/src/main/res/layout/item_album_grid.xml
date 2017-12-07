@@ -8,7 +8,7 @@
         android:id="@+id/iv_album_img_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/adele"
+        android:src="@drawable/default_album_cover"
         android:scaleType="fitXY"/>
 
     <LinearLayout

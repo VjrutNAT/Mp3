@@ -11,7 +11,9 @@ import android.widget.TextView;
 
 import com.demo.vjrutnat.mp3.R;
 import com.demo.vjrutnat.mp3.activities.ArtistListActivity;
+import com.demo.vjrutnat.mp3.models.Album;
 import com.demo.vjrutnat.mp3.models.Artist;
+import com.demo.vjrutnat.mp3.models.Song;
 
 import java.util.ArrayList;
 
@@ -25,11 +27,13 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
 
     Context mContext;
     ArrayList<Artist> mData;
+    ArrayList<Song> mSongs;
     LayoutInflater mLayoutInflater;
 
-    public ArtistAdapter(Context mContext, ArrayList<Artist> mData) {
+    public ArtistAdapter(Context mContext, ArrayList<Artist> mData, ArrayList<Song> mSongs) {
         this.mContext = mContext;
         this.mData = mData;
+        this.mSongs = mSongs;
         mLayoutInflater = LayoutInflater.from(mContext);
     }
 
@@ -37,13 +41,13 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
     public ViewHolderArtist onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mLayoutInflater.inflate(R.layout.item_artist, null);
         ViewHolderArtist holder = new ViewHolderArtist(view);
-
         return holder;
     }
 
     @Override
     public void onBindViewHolder(ViewHolderArtist holder, int position) {
-        holder.tvArtist.setText(mData.get(position).getName());
+        Artist artist = mData.get(position);
+        holder.tvArtist.setText(artist.getName());
         holder.setId(position);
     }
 
@@ -60,6 +64,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
 
     public class ViewHolderArtist extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView tvArtist;
+        TextView tvNumberAlbum;
         int id;
 
         public int getId() {
@@ -72,7 +77,8 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
 
         public ViewHolderArtist(View itemView) {
             super(itemView);
-            tvArtist = (TextView) itemView.findViewById(R.id.artist_title_item);
+            tvArtist = (TextView) itemView.findViewById(R.id.tv_artist_title_item);
+            tvNumberAlbum = (TextView) itemView.findViewById(R.id.tv_number_album_item);
             itemView.setOnClickListener(this);
         }
 

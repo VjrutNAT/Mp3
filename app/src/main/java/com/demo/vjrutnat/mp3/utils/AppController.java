@@ -118,17 +118,6 @@ public class AppController extends Application {
                 String pathArt = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Albums.ALBUM_ART));
                 int id = cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Albums._ID));
                 String artist = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Albums.ARTIST));
-//                ArrayList<Song> lstSongs = getListSongOfAlbum(id);
-
-//                final Uri ART_CONTENT_URI = Uri.parse("content://media/external/audio/albumart");
-//                Uri albumArtUri = ContentUris.withAppendedId(ART_CONTENT_URI, id);
-//                Bitmap bitmap = null;
-//                try {
-//                    bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), albumArtUri);
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-////                    bitmap = BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.);
-//                }
                 Album item = new Album(id, title, artist, pathArt);
                 lstAlbum.add(item);
             } while (cursor.moveToNext());

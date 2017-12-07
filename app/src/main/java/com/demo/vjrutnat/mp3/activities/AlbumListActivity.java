@@ -43,7 +43,6 @@ public class AlbumListActivity extends AppCompatActivity {
     ImageView imgBackGround;
     TextView tvAlbumTitle;
     int mAlbumId;
-    LoadListSongOfAlbum mLoadListSongOfAlbum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,29 +50,40 @@ public class AlbumListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_album_list);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_album_detail);
         setSupportActionBar(toolbar);
-        toolbar.setOverflowIcon(ContextCompat.getDrawable(this,R.drawable.abc_ic_menu_moreoverflow_mtrl_alpha));
+        toolbar.setOverflowIcon(ContextCompat.getDrawable(this, R.drawable.abc_ic_menu_moreoverflow_mtrl_alpha));
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        Common.setStatusBarTranslucent(true,this);
+        Common.setStatusBarTranslucent(true, this);
         initControls();
+        Intent intent = getIntent();
+        mAlbumId = intent.getExtras().getInt(AlbumListAdapter.ALBUM_KEY);
         if (!checkPermission()) {
             requestPermission();
         } else {
-            showListSongOfAlbum();
+            getAndShowSongList();
         }
         showCover();
+//        getAndShowSongList();
         AppController.getInstance().setDefaultWallpaper(imgBackGround);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void getAndShowSongList() {
+        Intent intent = getIntent();
+        mAlbumId = intent.getExtras().getInt(AlbumListAdapter.ALBUM_KEY);
+        mListSong = AppController.getInstance().getListSongOfAlbum(mAlbumId);
+        mAdapter = new SongListAdapter(this, mListSong);
+        mRvSongList.setAdapter(mAdapter);
     }
 
     private void showCover() {
@@ -102,7 +112,7 @@ public class AlbumListActivity extends AppCompatActivity {
     }
 
     private void requestPermission() {
-        ActivityCompat.requestPermissions(this, new String[]{ READ_EXTERNAL_STORAGE}, Constants.PERMISSION_REQUEST_CODE);
+        ActivityCompat.requestPermissions(this, new String[]{READ_EXTERNAL_STORAGE}, Constants.PERMISSION_REQUEST_CODE);
     }
 
     @Override
@@ -114,7 +124,7 @@ public class AlbumListActivity extends AppCompatActivity {
                     boolean readAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
 
                     if (readAccepted) {
-                        showListSongOfAlbum();
+                        getAndShowSongList();
                     } else {
                         Toast.makeText(this, getString(R.string.permission_denied), Toast.LENGTH_SHORT).show();
                         if (ActivityCompat.shouldShowRequestPermissionRationale(this, READ_EXTERNAL_STORAGE)) {
@@ -140,28 +150,4 @@ public class AlbumListActivity extends AppCompatActivity {
                 .show();
     }
 
-    private class LoadListSongOfAlbum extends AsyncTask{
-
-        @Override
-        protected Object doInBackground(Object[] objects) {
-            Intent intent = getIntent();
-            mAlbumId = intent.getExtras().getInt(AlbumListAdapter.ALBUM_KEY);
-            if (AppController.getInstance().getListSongOfAlbum(mAlbumId) == null){
-                mListSong = AppController.getInstance().getListSongOfAlbum(mAlbumId);
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Object o) {
-            mAdapter = new SongListAdapter(AlbumListActivity.this, mListSong);
-            mRvSongList.setAdapter(mAdapter);
-            super.onPostExecute(o);
-        }
-    }
-
-    private void showListSongOfAlbum(){
-        mLoadListSongOfAlbum = new LoadListSongOfAlbum();
-        mLoadListSongOfAlbum.execute();
-    }
 }

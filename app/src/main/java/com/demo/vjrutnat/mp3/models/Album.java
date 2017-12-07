@@ -25,20 +25,8 @@ public class Album implements Serializable {
         this.albumArtPath = albumArtPath;
     }
 
-    public Album(int id, String title, String artist, ArrayList<Song> lstSong, Bitmap albumArt) {
-        this.id = id;
-        this.title = title;
-        this.artist = artist;
-        this.lstSong = lstSong;
-        this.albumArt = albumArt;
-    }
-
     public String getAlbumArtPath() {
         return albumArtPath;
-    }
-
-    public void setAlbumArtPath(String albumArtPath) {
-        this.albumArtPath = albumArtPath;
     }
 
     public int getId() {
@@ -61,23 +49,4 @@ public class Album implements Serializable {
         return artist;
     }
 
-    public void setArtist(String artist) {
-        this.artist = artist;
-    }
-
-    public ArrayList<Song> getLstSong() {
-        return lstSong;
-    }
-
-    public void setLstSong(ArrayList<Song> lstSong) {
-        this.lstSong = lstSong;
-    }
-
-    public Bitmap getAlbumArt() {
-        return albumArt;
-    }
-
-    public void setAlbumArt(Bitmap albumArt) {
-        this.albumArt = albumArt;
-    }
 }
