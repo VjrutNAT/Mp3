@@ -20,7 +20,6 @@ import android.widget.ProgressBar;
 
 import com.demo.vjrutnat.mp3.R;
 import com.demo.vjrutnat.mp3.adapter.AlbumGridAdapter;
-import com.demo.vjrutnat.mp3.adapter.AlbumListAdapter;
 import com.demo.vjrutnat.mp3.models.Album;
 import com.demo.vjrutnat.mp3.utils.AppController;
 import com.demo.vjrutnat.mp3.utils.GridSpacingItemDecoration;
@@ -37,7 +36,6 @@ public class FragmentAlbum extends Fragment implements SearchView.OnQueryTextLis
     ProgressBar mProgressBar;
     View mView;
     RecyclerView mRvAlbumList;
-    AlbumListAdapter mAlbumAdapter;
     AlbumGridAdapter mAlbumGridAdapter;
     ArrayList<Album> mLstAlbum;
     LoadAlbumList loadAlbumList;
@@ -154,9 +152,6 @@ public class FragmentAlbum extends Fragment implements SearchView.OnQueryTextLis
         @Override
         protected void onPostExecute(Object o) {
             super.onPostExecute(o);
-//            mAlbumAdapter = new AlbumListAdapter(getActivity(), mLstAlbum);
-//            mRvAlbumList.setAdapter(mAlbumAdapter);
-
             mAlbumGridAdapter = new AlbumGridAdapter(getActivity(), mLstAlbum);
             mRvAlbumList.setAdapter(mAlbumGridAdapter);
             mProgressBar.setVisibility(View.GONE);

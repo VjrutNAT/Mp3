@@ -33,12 +33,12 @@
 
         <receiver android:name=".receivers.NextMusicBroadcastReceiver">
             <intent-filter>
-                <action android:name="com.example.iceman.Mp3Player.ACTION_NEXT" />
+                <action android:name="com.demo.vjrutnat.mp3.ACTION_NEXT" />
             </intent-filter>
         </receiver>
         <receiver android:name=".receivers.PlayPauseMusicBroadcastReceiver">
             <intent-filter>
-                <action android:name="com.example.iceman.Mp3Player.ACTION_PLAY_PAUSE" />
+                <action android:name="com.demo.vjrutnat.mp3.ACTION_PLAY_PAUSE" />
             </intent-filter>
         </receiver>
 
@@ -53,7 +53,7 @@
 
         <receiver android:name=".receivers.PrevMusicBroadcastReceiver">
             <intent-filter>
-                <action android:name="com.example.iceman.Mp3Player.ACTION_PREV" />
+                <action android:name="com.demo.vjrutnat.mp3.ACTION_PREV" />
             </intent-filter>
         </receiver>
         <receiver android:name=".receivers.RemoteReceiver">
@@ -62,7 +62,8 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".activities.ArtistListActivity"></activity>
+        <activity android:name=".activities.ArtistListActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

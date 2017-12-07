@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.view.WindowManager;
 
 import com.demo.vjrutnat.mp3.R;
@@ -18,6 +19,10 @@ public class Common {
         Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.default_wallpaper);
         return bitmap;
     };
+
+    public static boolean isMarshMallow(){
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M;
+    }
     public static void setStatusBarTranslucent(boolean makeTranslucent, Activity activity) {
         if (makeTranslucent) {
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
